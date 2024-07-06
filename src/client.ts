@@ -104,7 +104,7 @@ async function notifyEvery45Minutes(data: { temperature: string, humidity: strin
   if(data.isRain){
     let msgg = encodeURIComponent(`Esta chuvendo!`);
     notifyPush(msgg);
-    await axios.get("https://signal.callmebot.com/signal/send.php?phone=5577991716934&apikey=234765&text=" + msg)
+    await axios.get("https://signal.callmebot.com/signal/send.php?phone=5577991716934&apikey=234765&text=" + msgg)
   }
 
   if (lastnn && lastnn.date + 2700000 > Date.now()) {
