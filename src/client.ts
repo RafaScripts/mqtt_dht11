@@ -56,7 +56,7 @@ function getHumidity(message: string[]) {
 }
 
 function getRain(message: string[]) {
-  return message[5] === "0";
+  return message[5] == "0";
 }
 
 function normalize(message: string[]) {
