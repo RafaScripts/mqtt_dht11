@@ -55,10 +55,22 @@ function getHumidity(message: string[]) {
   return message[3];
 }
 
+
+function getRain(message: string[]) {
+  if(message[5] == "1"){
+    return false;
+  }else if(message[5] == "0"){
+    return true;
+  }else{
+    return false;
+  };
+}
+
 function normalize(message: string[]) {
   return {
     temperature: getTemperature(message),
-    humidity: getHumidity(message)
+    humidity: getHumidity(message),
+    isRain: getRain(message)
   };
 }
 
@@ -82,15 +94,23 @@ async function notifyPush(message: string){
   )
 }
 
-async function notifyEvery45Minutes(data: { temperature: string, humidity: string }) {
+async function notifyEvery45Minutes(data: { temperature: string, humidity: string, isRain: true }) {
   const lastnn = lastNotify[lastNotify.length - 1];
+
+  
+
+  let msg = encodeURIComponent(`Temperatura: ${data.temperature}°C\nHumidade: ${data.humidity}%`);
+
+  if(data.isRain){
+    let msgg = encodeURIComponent(`Esta chuvendo!`);
+    notifyPush(msgg);
+    await axios.get("https://signal.callmebot.com/signal/send.php?phone=5577991716934&apikey=234765&text=" + msg)
+  }
 
   if (lastnn && lastnn.date + 2700000 > Date.now()) {
     console.log("\x1b[35m", `Mensagem não enviada: ${JSON.stringify(lastnn)}`);
     return;
   }
-
-  let msg = encodeURIComponent(`Temperatura: ${data.temperature}°C\nHumidade: ${data.humidity}%`);
 
   try {
     const response = await axios.get("https://signal.callmebot.com/signal/send.php?phone=5577991716934&apikey=234765&text=" + msg);
