@@ -1,0 +1,18 @@
+{
+  "name": "mqtt_viewer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/client.ts"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/mqtt": "^2.5.0",
+    "axios": "^1.7.2",
+    "mqtt": "^5.8.0",
+    "pushsafer-notifications": "^0.2.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}
