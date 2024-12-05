@@ -4,7 +4,7 @@ import mqtt from 'mqtt';
  * mqtt broker
  */
 const client = mqtt.connect('mqtt://localhost:1883');
-const topic = 'MQTTMakerHeroRecebe';
+const topic = 'tracker';
 
 client.on('connect', () => {
   console.log('\x1b[33m', 'Conectado ao broker com sucesso');
