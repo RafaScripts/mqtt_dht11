@@ -7,6 +7,14 @@ networks:
 
 services:
   back:
+    build: .docker/backend
+    container_name: mqtt-api
+    networks:
+      - mqtt-net  # Mantido conforme definido
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/usr/src/app
   mqtt:
     image: eclipse-mosquitto
     container_name: soil-mqtt
